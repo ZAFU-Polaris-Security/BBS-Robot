@@ -7,5 +7,5 @@ lateinit var Logger : MiraiLogger
 
 // Setting
 const val INTERVAL : Long = 1000*60*10
-const val URL = "https://0xffff.one/atom"
+const val URL = "https://bbs.zafu-polaris.cn/atom"
 
