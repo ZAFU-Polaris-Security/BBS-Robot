@@ -41,12 +41,22 @@ object Notifier {
             // check new post
             val feed = SyndFeedInput().build(XmlReader(URL(URL)))
             val newEntry = mutableListOf<Entry>()
-            feed.entries.subList(0, 10).forEach {
-                val entryTemp = it.toEntry()
-                if (cacheEntry.add(entryTemp)) {
-                    newEntry.add(entryTemp)
+            if(feed.entries.size <10){
+                feed.entries.forEach {
+                    val entryTemp = it.toEntry()
+                    if (cacheEntry.add(entryTemp)) {
+                        newEntry.add(entryTemp)
+                    }
+                }
+            }else {
+                feed.entries.subList(0, 10).forEach {
+                    val entryTemp = it.toEntry()
+                    if (cacheEntry.add(entryTemp)) {
+                        newEntry.add(entryTemp)
+                    }
                 }
             }
+
             Logger.info("newEntrySize:${newEntry.size}")
             if (newEntry.size > 0) {
                 val successEntry = publish(newEntry)
